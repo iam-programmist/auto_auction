@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'auto_auction.apps.AutoAuctionConfig,'
+    'auto_auction.apps.AutoAuctionConfig',
 ]
 
 MIDDLEWARE = [
