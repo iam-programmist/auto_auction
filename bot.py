@@ -1,10 +1,18 @@
+import os
+import django
 import telebot
 import requests
-from django.core.management import BaseCommand
 from django.utils import timezone
+from dotenv import load_dotenv
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
+django.setup()
+
 from auto_auction.models import UserProfile, Feedback, CarSearch
 
-API_TOKEN = 'API_KEY'
+load_dotenv('./.env')
+
+API_TOKEN = os.getenv('API_TOKEN')
 bot = telebot.TeleBot(API_TOKEN)
 
 main_menu = [
@@ -118,8 +126,5 @@ def validate_login(message, username):
     else:
         bot.send_message(message.chat.id, "Неверное имя пользователя или пароль.")
 
-class Command(BaseCommand):
-    help = 'Run the telegram bot'
-
-    def handle(self, *args, **kwargs):
-        bot.polling()
+if __name__ == '__main__':
+    bot.infinity_polling()

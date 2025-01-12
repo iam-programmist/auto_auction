@@ -14,7 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+load_dotenv('./.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,6 +34,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'auto_auction.apps.AutoAuctionConfig',
     'rest_framework',
+    'auto_auction',
 ]
 
 MIDDLEWARE = [
