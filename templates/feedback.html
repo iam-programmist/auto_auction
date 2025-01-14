@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отправить отзыв</title>
+</head>
+<body>
+    <h1>Оставьте ваш отзыв</h1>
+    <form action="/send-feedback/" method="post">
+        {% csrf_token %}
+        <textarea name="feedback" placeholder="Ваш отзыв"></textarea><br>
+        <button type="submit">Отправить</button>
+    </form>
+    <a href="/">Вернуться на главную</a>
+</body>
+</html>
