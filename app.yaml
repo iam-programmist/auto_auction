@@ -1,9 +1,7 @@
-runtime: python39
+runtime: python311
 entrypoint: gunicorn -b :$PORT server.wsgi
 
 handlers:
-- url: /static
-  static_dir: static/
 - url: /.*
   script: auto
 
