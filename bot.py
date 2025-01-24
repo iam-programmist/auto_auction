@@ -5,6 +5,7 @@ from telebot import types
 import requests
 from django.utils import timezone
 from dotenv import load_dotenv
+from server.settings import get_secret
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
 django.setup()
@@ -13,7 +14,7 @@ from auto_auction.models import Feedback
 
 load_dotenv('./.env')
 
-API_TOKEN = os.getenv('API_TOKEN')
+API_TOKEN = get_secret('API_TOKEN')
 bot = telebot.TeleBot(API_TOKEN)
 
 user_language = {}
