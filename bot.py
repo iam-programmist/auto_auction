@@ -5,7 +5,7 @@ from telebot import types
 import requests
 from django.utils import timezone
 from dotenv import load_dotenv
-from server.settings import get_secret
+from secret import get_secret
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
 django.setup()
