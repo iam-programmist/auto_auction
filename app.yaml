@@ -7,3 +7,11 @@ handlers:
 
 env_variables:
   DJANGO_SETTINGS_MODULE: server.settings
+
+automatic_scaling:
+  min_instances: 1
+  max_instances: 1
+  target_cpu_utilization: 0.65
+  target_throughput_utilization: 0.75
+
+instance_class: F2
