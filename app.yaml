@@ -12,4 +12,4 @@ handlers:
 env_variables:
   DJANGO_SETTINGS_MODULE: server.settings
 
-instance_class: B4
+instance_class: F4
