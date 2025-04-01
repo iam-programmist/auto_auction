@@ -65,10 +65,11 @@ def create_collage(url1, url2):
     collage.paste(img1, (0, 0))
     collage.paste(img2, (img1.width, 0))
 
-    collage_path = "collage.jpg"
-    collage.save(collage_path)
+    collage_bytes = BytesIO()
+    collage.save(collage_bytes, format="JPEG")
+    collage_bytes.seek(0)
 
-    return collage_path
+    return collage_bytes
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -87,24 +88,22 @@ def start(message):
         reply_markup=markup
     )
 
-    collage_path = create_collage(cars[1]["photo_url"], cars[2]["photo_url"])
-    caption = (
-        f"{cars[1]['name']}, {cars[1]['color']}, {cars[1]['model']} - {cars[2]['name']}, {cars[2]['color']}, {cars[2]['model']}"
-    )
+    collage_bytes = create_collage(cars[1]["photo_url"], cars[2]["photo_url"])
     
+    caption = f"{cars[1]['name']}, {cars[1]['color']}, {cars[1]['model']} - {cars[2]['name']}, {cars[2]['color']}, {cars[2]['model']}"
+
     markup = types.InlineKeyboardMarkup()
     markup.add(
         types.InlineKeyboardButton(cars[1]['name'], url=cars[1]["info_url"]),
         types.InlineKeyboardButton(cars[2]['name'], url=cars[2]["info_url"])
     )
 
-    with open(collage_path, 'rb') as photo:
-        bot.send_photo(
-            message.chat.id,
-            photo,
-            caption=caption,
-            reply_markup=markup
-        )
+    bot.send_photo(
+        message.chat.id,
+        collage_bytes,
+        caption=caption,
+        reply_markup=markup
+    )
 
     markup = types.InlineKeyboardMarkup(row_width=1)
     find_car_button = types.InlineKeyboardButton(
